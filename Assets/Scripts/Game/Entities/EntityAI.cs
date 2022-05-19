@@ -37,7 +37,7 @@ public class EntityAI : MonoBehaviour
         //If there is no target then set one
         if (targetRoad == null)
         {
-            targetRoad = Map.instance.roadPoints[0];
+            targetRoad = References.map.roadPoints[0];
             //Setting target pos
             targetPosition = new Vector3(targetRoad.Position.x, 1, targetRoad.Position.y);
 
@@ -111,8 +111,8 @@ public class EntityAI : MonoBehaviour
 
     protected virtual void OnEndReached()
     {
-        SetPositionOnMap(Map.instance.roadPoints[0].Position);
-        targetRoad = Map.instance.roadPoints[0];
+        SetPositionOnMap(References.map.roadPoints[0].Position);
+        targetRoad = References.map.roadPoints[0];
     }
 
 }

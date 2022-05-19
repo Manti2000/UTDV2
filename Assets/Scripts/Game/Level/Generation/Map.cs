@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Map : MonoBehaviour
 {
-    public static Map instance;
-
     [Header("In-game settings")]
     public WorldSettings Settings;
     public Vector2Int RoadEndPoints;
@@ -21,7 +19,7 @@ public class Map : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        References.map = this;
         update = false;
         Destroy(planeMeshRenderer.gameObject);
         Destroy(terrainMeshRenderer);
@@ -104,6 +102,24 @@ public class Map : MonoBehaviour
         chunk.Generate(finalHeightMap, translation, spriteAtlas, chunkPos - Vector2.one, Settings.maxHeight, transform, cutout);
 
         chunks[x, y] = chunk;
+    }
+
+    /// <summary>
+    /// Get a snapped to voxel position from a point in the world.
+    /// </summary>
+    /// <param name="point"></param>
+    /// <returns></returns>
+    public Vector3 GetWorldPosition(Vector3 point)
+    {
+        Vector3 pos = new Vector3(Mathf.RoundToInt(point.x), 0, Mathf.RoundToInt(point.z));
+
+        int chunkXIndex = (int)(pos.x / Settings.ChunkSize.x);
+        int chunkYIndex = (int)(pos.z / Settings.ChunkSize.y);
+
+        int voxelXIndex = (int)(pos.x % Settings.ChunkSize.x);
+        int voxelYIndex = (int)(pos.z % Settings.ChunkSize.y);
+
+        return pos + Vector3.up * (chunks[chunkXIndex, chunkYIndex].Data.voxels[voxelXIndex + 1, voxelYIndex + 1].height + 0.5F);
     }
 
     private Vector2Int GetPositionOnPerimeter(int length)

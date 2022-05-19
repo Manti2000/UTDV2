@@ -19,4 +19,6 @@ public struct WorldSettings
     public bool GenerateRoad;
     public bool SmoothTerrain;
     public float RoadThickness;
+
+    public Vector2Int ChunkSize { get { return new Vector2Int((mapWidth - 2) / chunksPerRow, (mapHeight - 2) / chunksPerRow); } }
 }

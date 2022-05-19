@@ -9,6 +9,7 @@ public class Chunk : MonoBehaviour
     public Material MeshMaterial;
     public MeshFilter meshFilter;
     public MeshRenderer meshRenderer;
+    public MeshCollider meshCollider;
 
     public void Generate(Texture2D heightmap, int[,] translation, SpriteAtlas spriteAtlas, Vector2 pos, float maxHeight, Transform parent = null, Vector4 cutout = new Vector4())
     {
@@ -26,5 +27,7 @@ public class Chunk : MonoBehaviour
         meshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.TwoSided;
 
         transform.position = new Vector3(pos.x, 0, pos.y);
+
+        meshCollider = gameObject.AddComponent<MeshCollider>();
     }
 }

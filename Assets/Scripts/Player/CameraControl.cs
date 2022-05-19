@@ -15,6 +15,8 @@ public class CameraControl : MonoBehaviour
     public bool mouseMovement = true;
     public bool arrowMovement = true;
 
+    public Camera cam;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -115,7 +117,10 @@ public class CameraControl : MonoBehaviour
                     return;
                 }
             }
-            transform.position -= scroll * ZoomAmount * Vector3.up;
+
+            Vector3 directionToZoom = (cam.ScreenToWorldPoint(new Vector3(Screen.width / 2F, Screen.height / 2F, 1)) - cam.transform.position);
+
+            transform.position += scroll * ZoomAmount * directionToZoom;
 
         }
     }

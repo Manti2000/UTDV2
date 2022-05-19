@@ -99,6 +99,7 @@ public class TerrainGenerator
         TerrainMeshData meshData = new TerrainMeshData();
         meshData.vertices = vertices.ToArray();
         meshData.triangles = triangles.ToArray();
+        meshData.voxels = voxels;
         meshData.uvs = uvs;
 
         return meshData;

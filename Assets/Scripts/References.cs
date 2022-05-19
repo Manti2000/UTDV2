@@ -8,7 +8,7 @@ public class References
     
 
     //Level
-    //public static Map map;
+    public static Map map;
 
 
     //Tower
